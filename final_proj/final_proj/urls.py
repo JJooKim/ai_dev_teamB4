@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from web_app.views import index_view, page1_view
+from web_app.views import index_view, page1_view, test_page1_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", index_view, name='index'),
     path("index/", index_view, name='index'),
     path("page1/<path:url>/", page1_view, name='page1'),
+    path("test_page1/<path:url>/", test_page1_view, name='test_page1'),
 ]

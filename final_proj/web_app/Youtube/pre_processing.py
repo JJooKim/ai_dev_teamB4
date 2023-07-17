@@ -1,8 +1,7 @@
 import os
 
 base_path = os.getcwd()
-base_path = os.path.join(base_path, "web_app")
-base_path = os.path.join(base_path, "Youtube")
+base_path = os.path.join(base_path, "web_app", "Youtube")
 
 
 import yt_dlp
@@ -12,7 +11,7 @@ def saveVideo(url):
     video_dir = os.path.join(base_path, "Video")
 
     ydl_opts = {
-        'format': 'bestvideo+bestaudio/best',
+        'format': 'bestvideo[height<=720]/best',
         'outtmpl': video_dir+'/youtube',
         'postprocessors': [{
             'key': 'FFmpegVideoConvertor',
@@ -25,7 +24,7 @@ def saveVideo(url):
     ydl.download([video_url])
     
 
-    return video_dir 
+    return video_dir
 
 def removeVideo(file_path):
     os.remove(file_path)
