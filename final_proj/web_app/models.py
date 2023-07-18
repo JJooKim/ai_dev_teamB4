@@ -5,8 +5,8 @@ from django.db import models
 class Youtube(models.Model):   
     def __str__(self): # 요게 뭐하는건지 확인
         return self.url
-    url = models.URLField(default="Insert a Youtube Link", max_length=200, null = False)
-
+    url = models.URLField(default="Insert a Youtube Link", max_length=200, null = True)
+    
 
 
     '''rf.

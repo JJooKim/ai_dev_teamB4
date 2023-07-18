@@ -36,9 +36,9 @@
                             <hr width="15%" class="centerr"/>
 
                             <div>
-                                <form method="POST" class="text-input">{% csrf_token %}
+                                <form method="POST" class="text-input" disabled>{% csrf_token %}
                                     {{youtube_form.url}}
-                                    <button type="submit" class="button-input">Send</button>
+                                    <button id="button1" type="submit" class="button-input" onclick="btnDisabled()">Send</button>
                                 </form>
                             </div>
                            
@@ -63,3 +63,14 @@
         <script src="{% static 'js/scripts.js' %}"></script>
     </body>
 </html>
+<script>
+function btnActive()  {
+    const target = document.getElementById('');
+    target.disabled = false;
+  }
+  
+  function btnDisabled()  {
+    const target = document.getElementById('urltext');
+    target.disabled = true;
+  }
+</script>

@@ -6,4 +6,3 @@ class YoutubeForm(forms.ModelForm):
     class Meta:
         model = Youtube
         fields = ('url',)
-    
