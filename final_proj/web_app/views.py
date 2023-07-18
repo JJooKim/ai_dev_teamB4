@@ -3,11 +3,14 @@ import os
 from django.shortcuts import HttpResponse, render, redirect
 from .models import Youtube
 from .forms import YoutubeForm
-
+import time
 from .get_script import get_script
 from .get_sum_v import pgl_sum
-
+from .vid_sum import vid_sum
 from .Youtube import pre_processing
+from .Youtube.lower_fps import lower_frame
+
+import logging
 
 # mainpage
 def index_view(request):
@@ -46,20 +49,22 @@ def page1_view(request, url):
 #test_page
 def test_page1_view(request, url):
     audio_path = pre_processing.saveVideo(url)
-
-    #audio_path = os.path.join(audio_path, "youtube.mp4")
+    time.sleep(1)
+    original_audio_path = os.path.join(audio_path, "youtube_original.mp4")
+    
+    audio_path = os.path.join(audio_path, "youtube.mp4")
 
     #script = get_script(audio_path)
 
     #fps 줄이기
-
-
-    #video = pgl_sum(audio_path)
-
+    lower_frame(original_audio_path, 5)
     
-
-    #pre_processing.removeVideo(audio_path)
+    #비디오 요약
+    video = pgl_sum(audio_path)
+    vid_sum(video)
+    
+    #원본 비디오 삭제
+    time.sleep(1)
+    pre_processing.removeVideo(original_audio_path)
   
-    return render(request, 'page1.html', {'url': url})
-
-
+    return render(request, 'page1.html', {'url': url, "video":video})
