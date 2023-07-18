@@ -18,7 +18,7 @@ def index_view(request):
         youtube_form = YoutubeForm(request.POST)
         if youtube_form.is_valid():
             youtube = youtube_form.save()
-            return redirect('test_page1', url=youtube.url)
+            return redirect('loading_page', url=youtube.url)
     else:
         youtube_form = YoutubeForm()
 
@@ -50,6 +50,7 @@ def page1_view(request, url):
 def test_page1_view(request, url):
     audio_path = pre_processing.saveVideo(url)
     time.sleep(1)
+    vid_Complete = False
     original_audio_path = os.path.join(audio_path, "youtube_original.mp4")
     
     audio_path = os.path.join(audio_path, "youtube.mp4")
@@ -61,10 +62,35 @@ def test_page1_view(request, url):
     
     #비디오 요약
     video = pgl_sum(audio_path)
-    vid_sum(video)
+    vid_Complete = vid_sum(video)
     
     #원본 비디오 삭제
-    time.sleep(1)
-    pre_processing.removeVideo(original_audio_path)
+    #time.sleep(3)
+    #pre_processing.removeVideo(original_audio_path)
   
     return render(request, 'page1.html', {'url': url, "video":video})
+
+def loading_page_view(request, url):
+    audio_path = pre_processing.saveVideo(url)
+    time.sleep(1)
+    vid_Complete = False
+    original_audio_path = os.path.join(audio_path, "youtube_original.mp4")
+
+    audio_path = os.path.join(audio_path, "youtube.mp4")
+
+    # script = get_script(audio_path)
+
+    # fps 줄이기
+    lower_frame(original_audio_path, 5)
+
+    # 비디오 요약
+    video = pgl_sum(audio_path)
+    vid_Complete = vid_sum(video)
+
+    # 원본 비디오 삭제
+    # time.sleep(3)
+    # pre_processing.removeVideo(original_audio_path)
+    if vid_Complete == True:
+        return render(request, 'page1.html', {'url': url, "video":video})
+
+    return False
