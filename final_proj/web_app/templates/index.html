@@ -36,8 +36,8 @@
                             <hr width="15%" class="centerr"/>
 
                             <div>
-                                <form method="POST" class="text-input" disabled>{% csrf_token %}
-                                    {{youtube_form.url}}
+                                <form method="POST" class="text-input" disabled>{%csrf_token%}
+                                    <input type="text", class="text-input" name="url" />
                                     <button id="button1" type="submit" class="button-input" onclick="btnDisabled()">Send</button>
                                 </form>
                             </div>

@@ -17,7 +17,7 @@
 
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     </head>
-    <body>
+    <body style="overflow:hidden;">
         <header>
             <h1 class="site-heading text-left text-faded d-none d-lg-block">
                 <span class="site-heading-upper text-primary mb-3">B4-Final-Project</span>
@@ -25,12 +25,24 @@
             </h1>
         </header>
 
-        <section class="page-section clearfix" style="margin-top: 50px;">
+        <section class="page-section clearfix" >
             <div class="container" >
                 <div class="intro">
                     
                     </div>
+                    <div class="intro-text text-center bg-faded p-5 rounded" style= "border:0px solid black;">
+                        <h2 class="section-heading mb-4">
+                            <font size="1">{{ url.url }}</font>
+                            <div>
+                                <img src="{% static 'assets/img/loading.gif' %}" width="700px" style="margin-top:-150px;padding-bottom:-250px"/>
+                            </div>
+                           
                     
+                        </h2>
+                        
+                        
+
+                    </div>
                 </div>
             </div>
         </section>
@@ -47,6 +59,7 @@
     </body>
 </html>
 <script>
+.body {overflow:hidden}
 function btnActive()  {
     const target = document.getElementById('');
     target.disabled = false;
