@@ -17,7 +17,7 @@ def index_view(request):
         
         youtube_form = YoutubeForm(request.POST)
         if youtube_form.is_valid():
-            return redirect('loading_page1', url=url)
+            return redirect('test_page1', url=url)
         else:
             return render(request, 'index.html', {'youtube_form': youtube_form})
     else:

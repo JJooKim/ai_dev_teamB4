@@ -30,6 +30,7 @@ jmespath==0.10.0
 llvmlite==0.40.1
 modelscope==1.7.1
 more-itertools==9.1.0
+movie-py==1.0.3
 multidict==6.0.4
 multiprocess==0.70.14
 mutagen==1.46.0

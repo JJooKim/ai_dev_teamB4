@@ -30,28 +30,42 @@
                 <div class="intro">
                     
                     </div>
-                    <div class="intro-text text-center bg-faded p-5 rounded" style= "border:0px solid black; margin-top:130px;">
+                    <div class="intro-text text-center bg-faded p-5 rounded" id="mainbox" style= "border:0px solid black; align-content: center; margin-top:130px;display:block">
                         <h2 class="section-heading mb-4">
                             <span class="section-heading-upper"><h1>ENTER YOUTUBE URL</h1></span>
                             <hr width="15%" class="centerr"/>
 
-                            <div>
-                                <form method="POST" class="text-input" disabled>{%csrf_token%}
+                            <div >
+                                <form method="POST" >{%csrf_token%}
                                     <input type="text", class="text-input" name="url" />
-                                    <button id="button1" type="submit" class="button-input" onclick="btnDisabled()">Send</button>
+                                    <button id="button1" type="submit" class="button-input" onclick="myFunction()">Send</button>
                                 </form>
                             </div>
                            
                     
                         </h2>
-                        
-                        
-
                     </div>
                 </div>
             </div>
         </section>
 
+        <section class="page-section clearfix" style="margin-top: 50px;">
+            <div class="container" >
+                <div class="intro">
+                    
+                    </div>
+                    <div class="intro-text text-center bg-faded p-5 rounded" id="loadingbox" style= "border:0px solid black; margin-top:130px;display:none">
+                    <img src="static/assets/img/loading.gif">
+                    <img src="static/assets/img/loading.gif">
+                    <img src="static/assets/img/loading.gif">
+                    <img src="static/assets/img/loading.gif">
+                    <img src="static/assets/img/loading.gif">
+                    <img src="static/assets/img/loading.gif">
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <style>
             @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
@@ -64,13 +78,12 @@
     </body>
 </html>
 <script>
-function btnActive()  {
-    const target = document.getElementById('');
-    target.disabled = false;
-  }
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+function myFunction() {
+  sleep(70).then(() => document.getElementById("loadingbox").style.display = "block");
+  document.getElementById("mainbox").style.display = "none";
   
-  function btnDisabled()  {
-    const target = document.getElementById('urltext');
-    target.disabled = true;
-  }
+}
 </script>
