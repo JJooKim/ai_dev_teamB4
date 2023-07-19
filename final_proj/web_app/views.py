@@ -25,33 +25,6 @@ def index_view(request):
     return render(request, 'index.html', {'youtube_form': youtube_form})
 
 
-# loading
-def loading_page1_view(request, url):
-    #render(request, 'loading_page1.html')
-    return render(request, 'loading_page1.html')
-
-# loading
-def temp_page_view(request, url):
-    return render(request, 'temp.html', {'url': url})
-
-# page1
-def page1_view(request, url):
-    audio_path = pre_processing.saveVideo(url)
-
-    audio_path = os.path.join(audio_path, "youtube.mp4")
-
-    script = get_script(audio_path)
-
-    
-
-    video = pgl_sum(audio_path)
-
-    
-
-    pre_processing.removeVideo(audio_path)
-  
-    return render(request, 'page1.html', {'url': url, "script": script, "video": video})
-
 
 #test_page
 def test_page1_view(request, url):
