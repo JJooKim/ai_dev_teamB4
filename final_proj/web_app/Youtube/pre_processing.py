@@ -12,7 +12,7 @@ def saveVideo(url):
 
     ydl_opts = {
         'format': 'bestvideo[height<=720]/best',
-        'outtmpl': video_dir+'/youtube',
+        'outtmpl': video_dir+'/youtube_original',
         'postprocessors': [{
             'key': 'FFmpegVideoConvertor',
             'preferedformat': 'mp4',

@@ -1,1 +1,3 @@
-import torch
+a="123456789"
+
+print(a[:-3])
