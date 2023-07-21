@@ -31,7 +31,7 @@ def saveVideo(url):
 
     # video rename
     base, ext = os.path.split(video_path)
-    new_video_path = os.path.join(base,'youtube.mp4')
+    new_video_path = os.path.join(base,'youtube_original.mp4')
     os.rename(video_path, new_video_path)
 
     audio_path = mp4towav(new_video_path)

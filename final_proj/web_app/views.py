@@ -28,12 +28,11 @@ def index_view(request):
 def page1_view(request, url):
     v_path, a_path = pre_processing.saveVideo(url)
 
-    print(v_path)
-    print(a_path)
 
     video = pgl_sum(v_path)
 
     script = get_script(a_path)
+
 
     pre_processing.removeVideo(a_path)
     pre_processing.removeVideo(v_path)
