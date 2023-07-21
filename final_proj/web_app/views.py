@@ -26,16 +26,18 @@ def index_view(request):
 
 # page1
 def page1_view(request, url):
-    audio_path = pre_processing.saveVideo(url)
+    v_path, a_path = pre_processing.saveVideo(url)
 
-    audio_path = os.path.join(audio_path, "youtube.mp4")
+    print(v_path)
+    print(a_path)
 
+    video = pgl_sum(v_path)
 
-    video = pgl_sum(audio_path)
+    script = get_script(a_path)
 
-    script = get_script(audio_path)
+    pre_processing.removeVideo(a_path)
+    pre_processing.removeVideo(v_path)
 
-    pre_processing.removeVideo(audio_path)
   
     return render(request, 'page1.html', {'url': url, "script": script, "video": video})
 
