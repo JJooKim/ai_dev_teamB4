@@ -3,8 +3,6 @@ import os
 base_path = os.getcwd()
 base_path = os.path.join(base_path, "web_app", "Youtube")
 
-
-<<<<<<< HEAD
 import yt_dlp
 
 def saveVideo(url):
@@ -27,8 +25,7 @@ def saveVideo(url):
 
     return video_dir
 
-=======
->>>>>>> 76dd01a4010d2f0d3d179113736a188b8bc90952
+
 def removeVideo(file_path):
     os.remove(file_path)
 
