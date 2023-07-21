@@ -1,0 +1,11 @@
+recursive-exclude .github *
+recursive-exclude dist *
+recursive-exclude docs *
+exclude docs/requirements.txt
+exclude *
+include README.md
+include LICENSE
+include pyproject.toml
+include setup.cfg
+include scenedetect.cfg
+include dist/package-info.rst

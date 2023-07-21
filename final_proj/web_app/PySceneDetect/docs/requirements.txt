@@ -1,0 +1,4 @@
+Sphinx == 7.0.1
+opencv-python
+numpy
+av
