@@ -67,5 +67,4 @@ websockets==11.0.3
 xxhash==3.2.0
 yapf==0.40.1
 yarl==1.9.2
-yt-dlp==2023.7.6
 zipp==3.16.0
