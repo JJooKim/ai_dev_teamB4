@@ -1,58 +1,37 @@
 
+import copy
+
 def get_scene_script(script, timeline):
     ret = []
-    id = 0
-    for t in timeline:
+    curr_script_id = 0
+    for idx, t in enumerate(timeline):
 
       start = t['start']
       end = t['end']
       txt = ''      
 
-      for s in script:
-        if s['start'] >= start:
-          txt += s['text']
-          if s['end'] >= end:
-            break
-      
+      if curr_script_id <= len(script):
+        for s in script[curr_script_id:]:
+          if s['start'] <= start and start <= s['end']:
+            txt += s['text']
+            curr_script_id += 1
+            if s['end'] >= end:            
+              break
+          elif s['start'] >= start:
+            txt += s['text']
+            curr_script_id += 1
+            if s['end'] >= end:            
+              break            
 
-
-
-
-
-      while start > int(script[k]['start']) and int(script[k]['start']) != max_time_s :
-        k += 1
-      start_k = k
+      if txt == '':
+        continue
     
-
-      # max_time_s = int(script[-1]['start'])
-      # max_time_e = int(script[-1]['end'])
-
-
-      # if not start :
-      #   start_k = 0
-      # else :
-      #   k = 0
-      #   while start > int(script[k]['start']) and int(script[k]['start']) != max_time_s :
-      #     k += 1
-      #   start_k = k
-
-      # if not end :
-      #   end_k = len(script) -1
-      # else :
-      #   k = 0
-      #   while end > int(script[k]['end']) and int(script[k]['end']) != max_time_e :
-      #     k += 1
-      #   end_k = k
-
-
-      for i in range(start_k, end_k + 1) :
-        txt += script[i]['text']
- 
-      ret.append({'tid': id, 'start':start, 'end': end, 'text': txt})
-      id += 1
-
-
+      ret.append({'tid': idx, 'start':start, 'end': end, 'text': txt})
+      
     return ret
+
+
+
 
 from kiwipiepy import Kiwi
 

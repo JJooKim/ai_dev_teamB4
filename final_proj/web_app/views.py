@@ -56,10 +56,9 @@ def page1_view(request, url):
     ## summary
 
     # 확인위해 임시로 만듦
-    scene_time = [{'start': 0.162, 'end': 18.950},
- {'start': 39.018, 'end': 47.824},
- {'start': 54.223, 'end': 77.465},
- {'start': 99.496, 'end': 234.803},
+    scene_time = [{'start': 0.162, 'end': 5.950},
+ {'start': 8.018, 'end': 12.824},
+ {'start': 16.223, 'end': 25.465},
 ]
 
     scene_script = get_scene_script(script, scene_time)
@@ -72,6 +71,6 @@ def page1_view(request, url):
     pre_processing.removeVideo(v_path)
     pre_processing.removeVideo(low_v_path)
   
-    return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time, "scene_summary": scene_summary})
+    return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time, "scene_script": scene_script, "scene_summary": scene_summary})
 
 
