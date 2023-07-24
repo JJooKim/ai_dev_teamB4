@@ -39,6 +39,11 @@ def milli2strtime(milli_sec):
 
     return str_time
 
+def time2sec(timeStr):
+    spl = timeStr.split(":")
+    s = (int)(int(spl[0]) * 60 * 60 + int(spl[1]) * 60 + float(spl[2]) )
+    return s
+
 
 def get_segment_based_vad(output, sec):
   # sec는 초단위 ex. 5(5초), 10(10초)
@@ -51,7 +56,7 @@ def get_segment_based_vad(output, sec):
         end_time = str_speech[20:-1]
 
         if i == 0:
-            timelines.append({'tid': tid, 'start':start_time, 'end':end_time})
+            timelines.append({'tid': tid, 'start': time2sec(start_time), 'end': time2sec(end_time)})
             tid += 1
             continue
 
@@ -61,7 +66,7 @@ def get_segment_based_vad(output, sec):
         milli_sec = sec*1000
 
         if compareSec(prev_end_time, start_time, milli_sec):
-            timelines.append({'tid': tid, 'start':start_time, 'end':end_time})
+            timelines.append({'tid': tid, 'start': time2sec(start_time), 'end': time2sec(end_time)})
             tid += 1
         else:
             timelines[-1]['end'] = end_time
@@ -83,7 +88,7 @@ def get_segment_based_sdz(output, speaker_sec, empty_sec):
     speaker = list(speaker)[0]
 
     if i == 0:
-      timelines.append({'tid': tid, 'start': start_time, 'end': end_time, 'speaker': speaker})
+      timelines.append({'tid': tid, 'start': time2sec(start_time), 'end': time2sec(end_time), 'speaker': speaker})
       tid += 1
       continue
 
@@ -95,14 +100,14 @@ def get_segment_based_sdz(output, speaker_sec, empty_sec):
     # (이전 발화 후 현 발화 간의 시간이 empty_sec보다 길다면) 
     # 같은 speaker라도 발화 split
     if compareSec(prev_end_time, start_time, milli_sec):
-      timelines.append({'tid': tid, 'start': start_time, 'end': end_time, 'speaker': speaker})
+      timelines.append({'tid': tid, 'start': time2sec(start_time), 'end': time2sec(end_time), 'speaker': speaker})
       continue
 
 
     if prev_speaker == speaker:
       timelines[-1]['end'] = end_time
     else:
-      timelines.append({'tid': tid, 'start': start_time, 'end': end_time, 'speaker': speaker})
+      timelines.append({'tid': tid, 'start': time2sec(start_time), 'end': time2sec(end_time), 'speaker': speaker})
       tid += 1
 
   # 한 사람의 발화가 sec초 이상인 timeline 추출
@@ -148,7 +153,7 @@ def get_segment_based_osd(output, sec, audio_end_time):
         if milliSec(end_time) > milliSec(audio_end_time):
             end_time = audio_end_time
 
-        timelines.append({'tid': tid, 'start': start_time, 'end': end_time})
+        timelines.append({'tid': tid, 'start': time2sec(start_time), 'end': time2sec(end_time)})
         tid += 1
 
     return timelines
