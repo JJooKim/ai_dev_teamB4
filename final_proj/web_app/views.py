@@ -55,10 +55,17 @@ def page1_view(request, url):
 
     ## summary
 
+    # 확인위해 임시로 만듦
+    scene_time = [{'start': 0.162, 'end': 18.950},
+ {'start': 39.018, 'end': 47.824},
+ {'start': 54.223, 'end': 77.465},
+ {'start': 99.496, 'end': 234.803},
+]
+
     scene_script = get_scene_script(script, scene_time)
     scene_summary = get_scene_summary(scene_script)
 
-
+    
 
     # download 받은 영상 제거
     pre_processing.removeVideo(a_path)
