@@ -6,34 +6,49 @@ def get_scene_script(script, timeline):
 
       start = t['start']
       end = t['end']
-      s = ''      
+      txt = ''      
+
+      for s in script:
+        if s['start'] >= start:
+          txt += s['text']
+          if s['end'] >= end:
+            break
+      
 
 
-      max_time_s = int(script[-1]['start'])
-      max_time_e = int(script[-1]['end'])
 
 
-      if not start :
-        start_k = 0
-      else :
-        k = 0
-        while start > int(script[k]['start']) and int(script[k]['start']) != max_time_s :
-          k += 1
-        start_k = k
 
-      if not end :
-        end_k = len(script) -1
-      else :
-        k = 0
-        while end > int(script[k]['end']) and int(script[k]['end']) != max_time_e :
-          k += 1
-        end_k = k
+      while start > int(script[k]['start']) and int(script[k]['start']) != max_time_s :
+        k += 1
+      start_k = k
+    
+
+      # max_time_s = int(script[-1]['start'])
+      # max_time_e = int(script[-1]['end'])
+
+
+      # if not start :
+      #   start_k = 0
+      # else :
+      #   k = 0
+      #   while start > int(script[k]['start']) and int(script[k]['start']) != max_time_s :
+      #     k += 1
+      #   start_k = k
+
+      # if not end :
+      #   end_k = len(script) -1
+      # else :
+      #   k = 0
+      #   while end > int(script[k]['end']) and int(script[k]['end']) != max_time_e :
+      #     k += 1
+      #   end_k = k
 
 
       for i in range(start_k, end_k + 1) :
-        s += script[i]['text']
+        txt += script[i]['text']
  
-      ret.append({'tid': id, 'start':start, 'end': end, 'text': s})
+      ret.append({'tid': id, 'start':start, 'end': end, 'text': txt})
       id += 1
 
 
