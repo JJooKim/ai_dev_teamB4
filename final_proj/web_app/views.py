@@ -14,6 +14,9 @@ from .Youtube.lower_fps import lower_frame
 from .scene_time import get_scene_time 
 from .voice_time import get_voice_time 
 
+
+from .scene_script import get_scene_script, get_scene_summary
+
 # mainpage
 def index_view(request):
     if request.method == 'POST':
@@ -26,7 +29,6 @@ def index_view(request):
         youtube_form = YoutubeForm()
 
     return render(request, 'index.html', {'youtube_form': youtube_form})
-
 
 
 
@@ -51,14 +53,18 @@ def page1_view(request, url):
     # voice Detect 타임 라인 
     voice_time = get_voice_time(a_path) 
 
-    ## summary..
-    
+    ## summary
+
+    scene_script = get_scene_script(script, scene_time)
+    scene_summary = get_scene_summary(scene_script)
+
+
 
     # download 받은 영상 제거
     pre_processing.removeVideo(a_path)
     pre_processing.removeVideo(v_path)
     pre_processing.removeVideo(low_v_path)
   
-    return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time})
+    return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time, "scene_summary": scene_summary})
 
 
