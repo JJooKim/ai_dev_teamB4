@@ -1,4 +1,6 @@
 import scenedetect 
+import time
+from datetime import datetime
 from scenedetect import VideoManager, SceneManager, StatsManager
 from scenedetect.detectors import ContentDetector
 
@@ -24,15 +26,14 @@ def get_scene_time(v_path):
 
     t_list = []
     for i, scene in enumerate(scene_list):
-        start, end = str(scene[0])[:12], str(scene[1])[:12]
-        #print(scene)
+        time_set = datetime.strptime('00:00:00.000','%H:%M:%S.%f')
+        start, end = datetime.strptime(str(scene[0])[:12],'%H:%M:%S.%f') - time_set, datetime.strptime(str(scene[1])[:12],'%H:%M:%S.%f') - time_set
+        start_timestamp = start.total_seconds()
+        end_timestamp = end.total_seconds()
         dic = {}
         dic['tid'] = i
-        dic['start'] = start
-        dic['end'] = end
+        dic['start'] = start_timestamp
+        dic['end'] = end_timestamp
         t_list.append(dic)
-    #print(t_list)
-        #print(f'{start.get_seconds()} ~ {end.get_seconds()}')
     
     return t_list
-#get_scene_time("C:/Users/KIM/Downloads/ai_dev_teamB4-main/ai_dev_teamB4/final_proj/web_app/Youtube/youtube_original.mp4")

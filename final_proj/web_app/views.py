@@ -45,6 +45,7 @@ def page1_view(request, url):
     ## nlp
     script = get_script(a_path)  # whisper 결과(json) 반환
 
+
     ## Time line 받아오기
     # Scence Detect 타임 라인
     scene_time = get_scene_time(v_path) 
@@ -52,6 +53,7 @@ def page1_view(request, url):
     voice_time = get_voice_time(a_path) 
 
     ## summary..
+    # kobart_result = get_kobart_result()
     
 
     # download 받은 영상 제거
