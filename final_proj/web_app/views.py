@@ -22,7 +22,10 @@ def index_view(request):
     #index 페이지 진입 시 해당 유저 디렉토리 초기화
     user_dir = os.getcwd()
     user_dir = os.path.join(user_dir, "web_app", "Youtube", request.session.session_key)
-    shutil.rmtree(user_dir)
+    try:    
+        shutil.rmtree(user_dir)
+    except:
+        pass
     
 
     if request.method == 'POST':
@@ -65,12 +68,13 @@ def page1_view(request, url):
 
     ## summary..
     
-
+    '''
     # download 받은 영상 제거
     pre_processing.removeVideo(a_path)
     pre_processing.removeVideo(v_path)
     pre_processing.removeVideo(low_v_path)
-  
+    '''
+
     return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time, 'key': request.session.session_key})
 
 
