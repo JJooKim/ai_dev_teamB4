@@ -13,10 +13,18 @@ from .Youtube.lower_fps import lower_frame
 
 from .scene_time import get_scene_time 
 from .voice_time import get_voice_time 
-
+import shutil
 
 # mainpage
 def index_view(request):
+    request.session.save()
+
+    user_dir = os.getcwd()
+    user_dir = os.path.join(user_dir, "web_app", "Youtube", request.session.session_key)
+
+    shutil.rmtree(user_dir)
+    
+
     if request.method == 'POST':
         youtube_form = YoutubeForm(request.POST)
 
@@ -25,7 +33,6 @@ def index_view(request):
             return redirect('page1', url=youtube.url)
     else:
         youtube_form = YoutubeForm()
-    request.session.save()
     return render(request, 'index.html', {'youtube_form': youtube_form, 'key':request.session.session_key})
 
 
