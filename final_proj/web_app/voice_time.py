@@ -6,17 +6,20 @@ access_token = "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"
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+# string time to milli second
 def milliSec(timeStr):
     spl = timeStr.split(":")
     s = (int)((int(spl[0]) * 60 * 60 + int(spl[1]) * 60 + float(spl[2]) )* 1000)
     return s
 
-def compareSec(time1, time2, millisec):
-    if (milliSec(time2) - milliSec(time1)) >= millisec:
+# time1, time2 compare (second based)
+def compareSec(time1, time2, sec):
+    if (time2 - time1) >= sec:
         return True
     else:
         return False
     
+# milli second to time(string type)
 def milli2strtime(milli_sec):
     if milli_sec < 0:
         return False
@@ -39,9 +42,10 @@ def milli2strtime(milli_sec):
 
     return str_time
 
+# string time to second time
 def time2sec(timeStr):
     spl = timeStr.split(":")
-    s = (int)(int(spl[0]) * 60 * 60 + int(spl[1]) * 60 + float(spl[2]) )
+    s = (int(spl[0]) * 60 * 60 + int(spl[1]) * 60 + float(spl[2]) )
     return s
 
 
@@ -63,13 +67,11 @@ def get_segment_based_vad(output, sec):
         prev_start_time = timelines[-1]['start']
         prev_end_time = timelines[-1]['end']
 
-        milli_sec = sec*1000
-
-        if compareSec(prev_end_time, start_time, milli_sec):
+        if compareSec(prev_end_time, time2sec(start_time), sec):
             timelines.append({'tid': tid, 'start': time2sec(start_time), 'end': time2sec(end_time)})
             tid += 1
         else:
-            timelines[-1]['end'] = end_time
+            timelines[-1]['end'] = time2sec(end_time)
 
     return timelines
 
@@ -77,7 +79,6 @@ def get_segment_based_sdz(output, speaker_sec, empty_sec):
   # sec는 초단위 ex. 5(5초), 10(10초)
   timelines = []
   tid = 0
-  milli_sec = empty_sec*1000
 
   # 같은 speaker 끼리 모아서 timeline 만들기
   for i, speech in enumerate(output.get_timeline()):
@@ -99,7 +100,7 @@ def get_segment_based_sdz(output, speaker_sec, empty_sec):
     # 이전 발화시간과 empty_sec 이상의 차이가 있다면
     # (이전 발화 후 현 발화 간의 시간이 empty_sec보다 길다면) 
     # 같은 speaker라도 발화 split
-    if compareSec(prev_end_time, start_time, milli_sec):
+    if compareSec(prev_end_time, time2sec(start_time), empty_sec):
       timelines.append({'tid': tid, 'start': time2sec(start_time), 'end': time2sec(end_time), 'speaker': speaker})
       continue
 
@@ -112,11 +113,10 @@ def get_segment_based_sdz(output, speaker_sec, empty_sec):
 
   # 한 사람의 발화가 sec초 이상인 timeline 추출
   long_timelines = []
-  milli_sec = speaker_sec*1000
   tid = 0
     
   for i, timeline in enumerate(timelines):
-    if compareSec(timeline['start'], timeline['end'], milli_sec):
+    if compareSec(timeline['start'], timeline['end'], speaker_sec):
       timeline['tid'] = tid
       tid += 1
       long_timelines.append(timeline)
@@ -188,4 +188,4 @@ def get_voice_time(audio_path, method='vad'):
 
             tl = get_segment_based_osd(sdz_output, 60, audio_end)
             
-            return[{'timeline': tl}]
+            return[{'Oerlapped Speech Detection based Timeline': tl}]
