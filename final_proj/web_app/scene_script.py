@@ -46,7 +46,7 @@ model = model.to(device)
 kiwi = Kiwi()
 
 
-def get_scene_summary(scene_script):
+def make_summary(scene_script):
     """
     text : 요약을 원하는 text
     k : 하나로 뭉칠 segment 갯수
@@ -82,3 +82,7 @@ def get_scene_summary(scene_script):
     
 
     return res
+
+
+def get_scene_summary(script, timeline):
+    return make_summary(get_scene_script(script, timeline))

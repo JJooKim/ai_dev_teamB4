@@ -38,7 +38,7 @@ def page1_view(request, url):
     base_path = os.getcwd()
     base_path = os.path.join(base_path, "web_app", "Youtube", request.session.session_key)
 
-    # .mp4, .wav 생성
+    # .mp4, .wav 생성, title 
     v_path, a_path, title = pre_processing.saveVideo(url, base_path)
 
     # fps 줄인 .mp4 생성
@@ -52,24 +52,17 @@ def page1_view(request, url):
     script = get_script(a_path)  # whisper 결과(json) 반환
 
     ## Time line 받아오기
-    # Scence Detect 타임 라인
+
+    # Scene Detect 타임 라인
     scene_time = get_scene_time(v_path) 
-    # voice Detect 타임 라인 
+    # Voice Detect 타임 라인 
     voice_time = get_voice_time(a_path) 
 
+    # Scene, Voice, 타임라인 별 script & summary 반환
+    
+    scene_summary = get_scene_summary(script, scene_time)
 
-
-
-    ## summary
-
-#     # 확인위해 임시로 만듦
-#     scene_time = [{'start': 0.162, 'end': 5.950},
-#  {'start': 8.018, 'end': 12.824},
-#  {'start': 16.223, 'end': 25.465},
-# ]
-
-    scene_script = get_scene_script(script, scene_time)
-    scene_summary = get_scene_summary(scene_script)
+    voice_summary = get_scene_summary(script, voice_time[0]['Voice Activity Detection based Timeline'])
 
     
 
@@ -78,8 +71,14 @@ def page1_view(request, url):
     pre_processing.removeVideo(v_path)
     pre_processing.removeVideo(low_v_path)
 
+    # Save information as 
+    save_d = {'title': title, 'url': url, 'whisper': script, 'scene_summary': scene_summary, 'voice_summary': voice_summary}
+    f = open("./save.txt","w")
+    f.write( str(save_d) )
+    f.close()
+
 
   
-    return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time, 'key': request.session.session_key, "scene_script": scene_script, "scene_summary": scene_summary})
+    return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time, 'key': request.session.session_key, "scene_summary": scene_summary, "voice_summary": voice_summary})
 
 
