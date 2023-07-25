@@ -17,11 +17,11 @@ import shutil
 
 # mainpage
 def index_view(request):
+    #사용자 고유 세션 저장(재부팅 후에도 같은 유저 세션키)
     request.session.save()
-
+    #index 페이지 진입 시 해당 유저 디렉토리 초기화
     user_dir = os.getcwd()
     user_dir = os.path.join(user_dir, "web_app", "Youtube", request.session.session_key)
-
     shutil.rmtree(user_dir)
     
 
