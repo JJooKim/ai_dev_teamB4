@@ -35,7 +35,7 @@ def index_view(request):
 # page1
 def page1_view(request, url):
     # .mp4, .wav 생성
-    v_path, a_path = pre_processing.saveVideo(url)
+    v_path, a_path, title = pre_processing.saveVideo(url)
 
     # fps 줄인 .mp4 생성
     low_v_path = lower_frame(v_path, 5)
@@ -53,13 +53,16 @@ def page1_view(request, url):
     # voice Detect 타임 라인 
     voice_time = get_voice_time(a_path) 
 
+
+
+
     ## summary
 
-    # 확인위해 임시로 만듦
-    scene_time = [{'start': 0.162, 'end': 5.950},
- {'start': 8.018, 'end': 12.824},
- {'start': 16.223, 'end': 25.465},
-]
+#     # 확인위해 임시로 만듦
+#     scene_time = [{'start': 0.162, 'end': 5.950},
+#  {'start': 8.018, 'end': 12.824},
+#  {'start': 16.223, 'end': 25.465},
+# ]
 
     scene_script = get_scene_script(script, scene_time)
     scene_summary = get_scene_summary(scene_script)
@@ -70,6 +73,8 @@ def page1_view(request, url):
     pre_processing.removeVideo(a_path)
     pre_processing.removeVideo(v_path)
     pre_processing.removeVideo(low_v_path)
+
+
   
     return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time, "scene_script": scene_script, "scene_summary": scene_summary})
 

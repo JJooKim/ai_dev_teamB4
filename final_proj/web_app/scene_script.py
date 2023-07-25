@@ -1,4 +1,3 @@
-
 import copy
 
 def get_scene_script(script, timeline):
@@ -45,10 +44,6 @@ model = BartForConditionalGeneration.from_pretrained('gogamza/kobart-summarizati
 model = model.to(device)
 
 kiwi = Kiwi()
-
-
-import copy
-
 
 
 def get_scene_summary(scene_script):
