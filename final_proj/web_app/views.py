@@ -27,22 +27,26 @@ def index_view(request):
             return redirect('page1', url=youtube.url)
     else:
         youtube_form = YoutubeForm()
-
-    return render(request, 'index.html', {'youtube_form': youtube_form})
+    request.session.save()
+    return render(request, 'index.html', {'youtube_form': youtube_form, 'key':request.session.session_key})
 
 
 
 # page1
 def page1_view(request, url):
+    
+    base_path = os.getcwd()
+    base_path = os.path.join(base_path, "web_app", "Youtube", request.session.session_key)
+
     # .mp4, .wav 생성
-    v_path, a_path, title = pre_processing.saveVideo(url)
+    v_path, a_path, title = pre_processing.saveVideo(url, base_path)
 
     # fps 줄인 .mp4 생성
     low_v_path = lower_frame(v_path, 5)
     
     ## cv
     video = pgl_sum(low_v_path)   # pgl_sum 결과(json) 반환
-    vid_sum(video)  # pgl_sum 결과에 해당하는 영상 추출, 저장
+    vid_sum(video, base_path)  # pgl_sum 결과에 해당하는 영상 추출, 저장
     
     ## nlp
     script = get_script(a_path)  # whisper 결과(json) 반환
@@ -76,6 +80,6 @@ def page1_view(request, url):
 
 
   
-    return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time, "scene_script": scene_script, "scene_summary": scene_summary})
+    return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time, 'key': request.session.session_key, "scene_script": scene_script, "scene_summary": scene_summary})
 
 
