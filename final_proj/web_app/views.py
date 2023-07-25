@@ -17,6 +17,8 @@ import shutil
 
 # mainpage
 def index_view(request):
+
+    '''
     #사용자 고유 세션 저장(재부팅 후에도 같은 유저 세션키)
     request.session.save()
     #index 페이지 진입 시 해당 유저 디렉토리 초기화
@@ -26,7 +28,7 @@ def index_view(request):
         shutil.rmtree(user_dir)
     except:
         pass
-    
+    '''
 
     if request.method == 'POST':
         youtube_form = YoutubeForm(request.POST)
@@ -78,3 +80,8 @@ def page1_view(request, url):
     return render(request, 'page1.html', {'url': url, "script": script, "video": video, "scene_time": scene_time, "voice_time": voice_time, 'key': request.session.session_key})
 
 
+def result_view(request):
+    context={}
+    context['gif']='sum_gif0.gif','sum_gif1.gif','sum_gif2.gif','sum_gif3.gif'
+    context['key']=request.session.session_key
+    return render(request, 'result.html', context)
