@@ -45,7 +45,7 @@ def milli2strtime(milli_sec):
 # string time to second time
 def time2sec(timeStr):
     spl = timeStr.split(":")
-    s = (int(spl[0]) * 60 * 60 + int(spl[1]) * 60 + float(spl[2]) )
+    s = (float)(int(spl[0]) * 60 * 60 + int(spl[1]) * 60 + float(spl[2]) )
     return s
 
 
