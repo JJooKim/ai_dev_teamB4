@@ -6,7 +6,7 @@ from .forms import YoutubeForm
 
 from .get_script import get_script 
 from .get_sum_v import pgl_sum 
-from .vid_sum import vid_sum 
+from .vid_sum import vid_sum, vid_sum_from_scene, vid_sum_from_voice
 
 from .Youtube import pre_processing 
 from .Youtube.lower_fps import lower_frame 
@@ -28,7 +28,7 @@ def index_view(request):
             youtube = youtube_form.save()
             url = youtube.url
             base_path = os.getcwd()
-            base_path = os.path.join(base_path, "web_app", "Youtube", request.session.session_key)
+            base_path = os.path.join(base_path, "web_app", "static", request.session.session_key)
 
             # .mp4, .wav 생성, title 
             v_path, a_path, title = pre_processing.saveVideo(url, base_path)
@@ -47,8 +47,10 @@ def index_view(request):
 
             # Scene Detect 타임 라인
             scene_time = get_scene_time(v_path) 
+            vid_sum_from_scene(scene_time,base_path)
             # Voice Detect 타임 라인 
             voice_time = get_voice_time(a_path) 
+            vid_sum_from_voice(voice_time,base_path)
 
             # Scene, Voice, 타임라인 별 script & summary 반환
             
@@ -56,7 +58,7 @@ def index_view(request):
 
             voice_summary = get_scene_summary(script, voice_time[0]['Voice Activity Detection based Timeline'])
 
-            
+    #        [{'Voice Activity Detection based Timeline': [{'start': 0, 'end': 13}, {'start': 33, 'end': 63}]}]
 
             # download 받은 영상 제거
             pre_processing.removeVideo(a_path)
@@ -65,12 +67,17 @@ def index_view(request):
 
             # Save information as 
             save_data = {'title': title, 'url': url, 'whisper': script, 'scene_summary': scene_summary, 'voice_summary': voice_summary}
-
+        
             file_path = os.path.join(base_path, 'data.pkl')
             with open(file_path, 'wb') as fp:
                 pickle.dump(save_data, fp)
-                print('dictionary saved successfully to file')
 
+            pkl_path = os.getcwd()
+            pkl_path=os.path.join(pkl_path, "web_app", title)
+            pkl_path=pkl_path+'.pkl'
+            with open(pkl_path, 'wb') as fp:
+                pickle.dump(save_data, fp)
+           
             return redirect('page1')
     else:
         youtube_form = YoutubeForm()
@@ -78,12 +85,11 @@ def index_view(request):
     return render(request, 'index.html', {'youtube_form': youtube_form, 'key':request.session.session_key})
 
 
-
 # page1
 def page1_view(request):
 
     base_path = os.getcwd()
-    base_path = os.path.join(base_path, "web_app", "Youtube", request.session.session_key)
+    base_path = os.path.join(base_path, "web_app", "static", request.session.session_key)
     file_path = os.path.join(base_path, 'data.pkl')
     with open(file_path, 'rb') as fp:
         data = pickle.load(fp)
@@ -96,11 +102,11 @@ def page1_view(request):
 def page2_view(request):
 
     base_path = os.getcwd()
-    base_path = os.path.join(base_path, "web_app", "Youtube", request.session.session_key)
+    base_path = os.path.join(base_path, "web_app", "static", request.session.session_key)
     file_path = os.path.join(base_path, 'data.pkl')
     with open(file_path, 'rb') as fp:
         data = pickle.load(fp)
-
+    
       
     return render(request, 'page2.html', data)
 
@@ -109,7 +115,7 @@ def page2_view(request):
 def page3_view(request):
 
     base_path = os.getcwd()
-    base_path = os.path.join(base_path, "web_app", "Youtube", request.session.session_key)
+    base_path = os.path.join(base_path, "web_app", "static", request.session.session_key)
     file_path = os.path.join(base_path, 'data.pkl')
     with open(file_path, 'rb') as fp:
         data = pickle.load(fp)
