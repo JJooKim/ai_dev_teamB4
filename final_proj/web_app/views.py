@@ -18,17 +18,15 @@ import shutil
 # mainpage
 def index_view(request):
 
-    '''
     #사용자 고유 세션 저장(재부팅 후에도 같은 유저 세션키)
     request.session.save()
     #index 페이지 진입 시 해당 유저 디렉토리 초기화
     user_dir = os.getcwd()
-    user_dir = os.path.join(user_dir, "web_app", "Youtube", request.session.session_key)
+    user_dir = os.path.join(user_dir, "web_app", "static", request.session.session_key)
     try:    
         shutil.rmtree(user_dir)
     except:
         pass
-    '''
 
     if request.method == 'POST':
         youtube_form = YoutubeForm(request.POST)
@@ -47,7 +45,7 @@ def index_view(request):
 def page1_view(request, url):
 
     base_path = os.getcwd()
-    base_path = os.path.join(base_path, "web_app", "Youtube", request.session.session_key)
+    base_path = os.path.join(base_path, "web_app", "static", request.session.session_key)
 
     # .mp4, .wav 생성
     v_path, a_path = pre_processing.saveVideo(url, base_path)
