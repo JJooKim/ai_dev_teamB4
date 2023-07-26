@@ -39,12 +39,11 @@ def page2_data(data):
 
     for voice_data in voice_sum:
         new_data['text'].append(voice_data['text'])
-        new_data['time'].append(voice_data['start'])
+        new_data['time'].append(sec2strtime(voice_data['start']))
 
     return new_data
 
 
-# 00:00:00-00:01:32
 def page3_data(data):
     new_data = {'text': [], 'time': [], 'img': []}
     scene_sum = data['scene_summary']
@@ -62,6 +61,7 @@ def page3_data(data):
     return new_data
 
 # second to time(string type)
+# 00:00:00-00:01:32
 def sec2strtime(sec): # 92.321
     # sec: float
     if sec < 0:

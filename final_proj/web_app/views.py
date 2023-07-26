@@ -17,7 +17,7 @@ from .voice_time import get_voice_time
 
 from .scene_script import get_scene_script, get_scene_summary
 
-import send_data
+from .send_data import page1_data, page2_data, page3_data
 
 import pickle
 
@@ -98,17 +98,11 @@ def page1_view(request):
     with open(file_path, 'rb') as fp:
         data = pickle.load(fp)
 
-    page1_data = send_data.page1_data(data)
+    p1_data = page1_data(data)
 
-    """
-    page1_data['full summary'] = ['---']
-    page1_data['text'] = ['dlfkjsldkf','dfklsd', ...]
-    page1_data['img'] = ['img1', 'img2', ...]
-    page1_data['timeline'] = ['00:00:00-00:01:32', ...]
-    """
+    # p1_data: {'summary': full_summary, 'text': [...], 'time': [...], 'img': []}
 
-      
-    return render(request, 'page1.html', page1_data)
+    return render(request, 'page1.html', p1_data)
 
 
 # page1
@@ -120,13 +114,11 @@ def page2_view(request):
     with open(file_path, 'rb') as fp:
         data = pickle.load(fp)
 
-    """
-    전체 스크립트
-    timeline, script
-    """
-    page2_data = send_data.page2_data(data)
+    # p2_data = {'text': [...], 'time': [...]}
+    
+    p2_data = page2_data(data)
 
-    return render(request, 'page2.html', page2_data)
+    return render(request, 'page2.html', p2_data)
 
 
 # page1
@@ -138,9 +130,8 @@ def page3_view(request):
     with open(file_path, 'rb') as fp:
         data = pickle.load(fp)
 
-    """
-    img, 
-    """
-    page3_data = send_data.page3_data(data)
+    # p3_data = {'text': [...], 'time': [...], 'img': [...]}
+
+    p3_data = page3_data(data)
       
-    return render(request, 'page3.html', page3_data)
+    return render(request, 'page3.html', p3_data)
