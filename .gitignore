@@ -1,2 +1,6 @@
 **/__pycache__
 venv
+pjenv
+final_proj/web_app/Youtube/
+!final_proj/web_app/Youtube/lower_fps.py
+!final_proj/web_app/Youtube/pre_processing.py
