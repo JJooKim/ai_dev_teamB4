@@ -96,12 +96,12 @@
 
         <div class="row gy-4 justify-content-center">
 
-          {% for scene, summ_text in zip_scene_gif_summ_text %}
+          {% for scene, summ in zip_scene_gif_summ_text %}
           <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="gallery-item h-100">
               <img src="../static/{{key}}/{{scene}}" class="img-fluid" alt="">
               <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="../static/{{key}}/{{scene}}" title= {{summ_text}} class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="../static/{{key}}/{{scene}}" title= "{{summ}}"" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
               </div>
             </div>
           </div><!-- End Gallery Item -->

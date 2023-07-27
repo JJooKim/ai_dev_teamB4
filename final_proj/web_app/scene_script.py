@@ -7,23 +7,15 @@ def get_scene_script(script, timeline):
 
       start = t['start']
       end = t['end']
-      txt = ''      
+      txt = ""      
 
-      if curr_script_id <= len(script):
-        for s in script[curr_script_id:]:
-          if s['start'] <= start and start <= s['end']:
-            txt += s['text']
-            curr_script_id += 1
-            if s['end'] >= end:            
-              break
-          elif s['start'] >= start:
-            txt += s['text']
-            curr_script_id += 1
-            if s['end'] >= end:            
-              break            
-
-      if txt == '':
-        continue
+      for s in script[curr_script_id:]:
+         if end < s['start']:
+            break 
+         txt += s['text']
+         curr_script_id += 1
+         if  s['end'] > end:
+            break
     
       ret.append({'tid': idx, 'start':start, 'end': end, 'text': txt})
       
