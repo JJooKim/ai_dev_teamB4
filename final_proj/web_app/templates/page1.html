@@ -100,14 +100,13 @@
         <div class="position-relative h-100">
           <div class="slides-1 portfolio-details-slider swiper">
             <div class="swiper-wrapper align-items-center">
-              
-              <div class="swiper-slide">
-                <img src="{% static 'bb73uuhya6733vvngemvc6lytrlvu8ut/sum_gif0.gif' %}" alt="">
-              </div>
+              {% for sum in sum_gif %}
 
               <div class="swiper-slide">
-                <img src="{% static 'bb73uuhya6733vvngemvc6lytrlvu8ut/sum_gif1.gif' %}" alt="">
+                <img src="../static/{{key}}/{{sum}}" alt="">
               </div>
+
+              {% endfor %}
             </div>
             
             <div class="swiper-pagination"></div>
