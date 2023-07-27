@@ -17,6 +17,8 @@ from .voice_time import get_voice_time
 
 from .scene_script import get_scene_script, get_scene_summary
 
+from .send_data import page1_data, page2_data, page3_data
+
 import pickle
 
 # mainpage
@@ -73,7 +75,7 @@ def index_view(request):
                 pickle.dump(save_data, fp)
 
             pkl_path = os.getcwd()
-            pkl_path=os.path.join(pkl_path, "web_app", title)
+            pkl_path=os.path.join(pkl_path, "web_app", "Data", title)
             pkl_path=pkl_path+'.pkl'
             with open(pkl_path, 'wb') as fp:
                 pickle.dump(save_data, fp)
@@ -94,8 +96,11 @@ def page1_view(request):
     with open(file_path, 'rb') as fp:
         data = pickle.load(fp)
 
+    # p1_data: {'title': title, 'url': url, 'summary': full_summary, 'text': [...], 'time': [...], 'pgl_img': []}
+    p1_data = page1_data(data)
+
       
-    return render(request, 'page1.html', data)
+    return render(request, 'page1.html', p1_data)
 
 
 # page1
@@ -107,8 +112,12 @@ def page2_view(request):
     with open(file_path, 'rb') as fp:
         data = pickle.load(fp)
     
+    # p2_data = {'title': ..., 'url': ..., 'summ_text': [...], 'time': [...], 'img': [...]}
+    p2_data = page2_data(data)
       
-    return render(request, 'page2.html', data)
+
+
+    return render(request, 'page2.html', p2_data)
 
 
 # page1
@@ -120,5 +129,8 @@ def page3_view(request):
     with open(file_path, 'rb') as fp:
         data = pickle.load(fp)
 
+    # p3_data = {'title': ..., 'url': ..., 'summ_text': [...], 'text': [[...],[...],[...],...], 'start_time': [[...],[...],[...],...], 'img': []}
+    p3_data = page3_data(data)
+
       
-    return render(request, 'page3.html', data)
+    return render(request, 'page3.html', p3_data)
