@@ -3,7 +3,12 @@
 # whisper = [{'start':start, 'end': end, 'text': txt, ...}, {'start':start, 'end': end, 'text': txt, ...}, ... ]
 # scene_summary = [{'tid': idx, 'start':start, 'end': end, 'text': txt, 'summ_text': sum_text}, {tid': idx, 'start':start, 'end': end, 'text': txt, 'summ_text'}]
 # voice summary = [{'tid': idx, 'start':start, 'end': end, 'text': txt, 'summ_text': sum_text}, {tid': idx, 'start':start, 'end': end, 'text': txt, 'summ_text'}]
-
+# 'cut_youtube'
+'scene_gif'
+'scene_youtube'
+'sum_gif'
+'voice_gif'
+'voice_youtube'
 
 def make_fullSum(voice_sum):
     full_summary = ''
@@ -18,7 +23,10 @@ def page1_data(data):
     voice_summary = data['voice_summary']
     full_summary = make_fullSum(voice_summary)
 
-    new_data = {'title': data['title'], 'url': data['url'], 'summary': full_summary, 'text': [], 'time': [], 'pgl_img': []}
+    new_data = {'title': data['title'], 'url': data['url'], 'summary': full_summary, 'text': [], 'time': [], 
+                'cut_youtube': data['cut_youtube'], 'scene_gif': data['scene_gif'], 'scene_youtube': data['scene_youtube'],
+                  'sum_gif': data['sum_gif'], 'voice_gif': data['voice_gif'], 'voice_youtube': data['voice_youtube'],
+                  'key': data['key']}
 
     for voice_data in voice_summary:
         new_data['text'].append(voice_data['summ_text'])
@@ -34,7 +42,11 @@ def page1_data(data):
 
 # scene 기준
 def page2_data(data):
-    new_data = {'title': data['title'], 'url': data['url'], 'summ_text': [], 'time': [], 'img': []}
+
+    new_data = {'title': data['title'], 'url': data['url'], 'summ_text': [], 'time': [], 
+                'cut_youtube': data['cut_youtube'], 'scene_gif': data['scene_gif'], 'scene_youtube': data['scene_youtube'],
+                  'sum_gif': data['sum_gif'], 'voice_gif': data['voice_gif'], 'voice_youtube': data['voice_youtube'],
+                  'key': data['key']}
     scene_sum = data['scene_summary']
 
     for scene_data in scene_sum:
@@ -45,14 +57,19 @@ def page2_data(data):
         time = start_t + '-' + end_t
 
         new_data['time'].append(time)
-
-
+    
+    # zip 으로 묶기
+    new_data['zip_scene_gif_summ_text'] = zip(new_data['scene_gif'],new_data['summ_text'])
+        
     return new_data
 
 
 
 def page3_data(data):
-    new_data = {'title': data['title'], 'url': data['url'], 'summ_text': [], 'text': [], 'start_time': [], 'img': []}
+    new_data = {'title': data['title'], 'url': data['url'], 'summ_text': [], 'text': [], 'start_time': [], 
+                'cut_youtube': data['cut_youtube'], 'scene_gif': data['scene_gif'], 'scene_youtube': data['scene_youtube'],
+                  'sum_gif': data['sum_gif'], 'voice_gif': data['voice_gif'], 'voice_youtube': data['voice_youtube'], 
+                  'key': data['key']}
     # new_data = {'summ_text': ['dfsdfsdf'], 'text': [['dfs', 'df', 'sdf']], 'start_time': [[0, 1, 2]]}
     voice_sum = data['voice_summary']
     whisper_data = data['whisper']
