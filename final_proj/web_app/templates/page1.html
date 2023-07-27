@@ -74,6 +74,7 @@
     </div>
   </header><!-- End Header -->
 
+
   <main id="main" data-aos="fade" data-aos-delay="1500">
 
     <!-- ======= End Page Header ======= -->
@@ -81,149 +82,78 @@
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Video Title</h2>
-            <p>The most scariest episode of Surpise</p>
+            <h2>Full Summary</h2>
+            <h3>{{  title  }}</h3>
+            {% comment %} <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p> {% endcomment %}
+
 
           </div>
         </div>
       </div>
     </div><!-- End Page Header -->
 
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+    <!-- ======= Gallery Single Section ======= -->
+    <section id="gallery-single" class="gallery-single">
       <div class="container">
 
-        <div class="row gy-4 justify-content-center">
-          <div class="col-lg-4">
-            <img src="{% static 'img/profile-img.jpg' %}" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-5 content">
-            <h2>Full Summary Script of the Video</h2>
-            <p class="fst-italic py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Video length:</strong> <span>547 seconds</span></li>
-                </ul>
+        <div class="position-relative h-100">
+          <div class="slides-1 portfolio-details-slider swiper">
+            <div class="swiper-wrapper align-items-center">
+              
+              <div class="swiper-slide">
+                <img src="{% static 'bb73uuhya6733vvngemvc6lytrlvu8ut/sum_gif0.gif' %}" alt="">
               </div>
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Video url:</strong> <span>www.example.com</span></li>
-                </ul>
+
+              <div class="swiper-slide">
+                <img src="{% static 'img/gallery/gallery-9.jpg' %}" alt="">
               </div>
             </div>
-            <p class="py-3">The URL is: {{ url }}</p>
-
-            <p class="py-3">The Whisper Script is: {{ script }}</p>
-
-            <p class="py-3">The PGL Sum Timeline is: {{ video }}</p>
-
-            <p class="py-3">The Voice Timeline is: {{ voice_time }}</p>
-
-            <p class="py-3">The Scene Timeline is: {{ scene_time }}</p>
-
-            <p class="m-0">The Voice summary is: {{ voice_summary }}</p>
-
-            <p class="m-0">The Scene summary is: {{ scene_summary }}</p>
-
+            
+            <div class="swiper-pagination"></div>
           </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+
         </div>
 
-      </div>
-    </section><!-- End About Section -->
+        <div class="row justify-content-between gy-4 mt-4">
 
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
-      <div class="container">
+          <div class="col-lg-8">
+            <div class="portfolio-description">
+              <h2>This is an scene summary cuts of your video</h2>
 
-        <div class="section-header">
-          <h2>Designed by PGL SUM</h2>
-          <p>Hight light Scenes</p>
-        </div>
-
-        <div class="slides-3 swiper">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
+             
               <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-
-                <div class="profile mt-auto">
-                  <img src="{% static 'img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="">
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-
-                <div class="profile mt-auto">
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  {{  summary  }}
+                  {% comment %} Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa. {% endcomment %}
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+                <!-- <div>
                   <img src="{% static 'img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
                   <h3>Sara Wilsson</h3>
                   <h4>Designer</h4>
-                </div>
+                </div> -->
               </div>
-            </div><!-- End testimonial item -->
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-
-                <div class="profile mt-auto">
-                  <img src="{% static 'img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-
-                <div class="profile mt-auto">
-                  <img src="{% static 'img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-
-                <div class="profile mt-auto">
-                  <img src="{% static 'img/testimonials/testimonials-5.jpg' %}" class="testimonial-img" alt="">
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
+            </div>
           </div>
-          <div class="swiper-pagination"></div>
+
+          <div class="col-lg-3">
+            <div class="portfolio-info">
+              <h3>Video  information</h3>
+              <ul>
+                <li><strong>Title</strong> <span>{{  title  }}</span></li>
+                <li><strong>Video URL</strong> <a href={{url}}>{{  url  }}</a></li>
+              </ul>
+            </div>
+          </div>
+
         </div>
 
       </div>
-    </section><!-- End Testimonials Section -->
+    </section><!-- End Gallery Single Section -->
 
   </main><!-- End #main -->
 
@@ -243,11 +173,11 @@
     </div>
   </footer><!-- End Footer -->
 
-  <!-- <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <div id="preloader">
     <div class="line"></div>
-  </div> -->
+  </div>
 
   <!-- Vendor JS Files -->
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
