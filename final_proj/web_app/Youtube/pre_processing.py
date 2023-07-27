@@ -1,4 +1,5 @@
 import os
+import re
 
 def removeVideo(file_path):
     os.remove(file_path)
@@ -39,3 +40,30 @@ def saveVideo(url, base_path):
 
     return new_video_path, audio_path, title
 
+
+def return_file_name_dict(key):
+    base_path = os.getcwd()
+    base_path = os.path.join(base_path, "web_app", "static", key)
+
+    list=os.listdir(base_path)
+
+    cont={'cut_youtube':[],'scene_gif':[],'scene_youtube':[],'sum_gif':[],'voice_gif':[],'voice_youtube':[],}
+
+    for i in list:
+        if i.startswith('cut_youtube'):
+            cont['cut_youtube'].append(i)
+        elif i.startswith('scene_gif'):
+            cont['scene_gif'].append(i)
+        elif i.startswith('scene_youtube'):
+            cont['scene_youtube'].append(i)
+        elif i.startswith('sum_gif'):
+            cont['sum_gif'].append(i)
+        elif i.startswith('voice_gif'):
+            cont['voice_gif'].append(i)
+        elif i.startswith('voice_youtube'):
+            cont['voice_youtube'].append(i)
+
+    for i in cont.keys():
+        cont[i].sort(key=lambda f: int(re.sub('\D', '', f)))
+
+    return cont
