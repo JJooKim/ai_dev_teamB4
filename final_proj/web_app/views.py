@@ -19,10 +19,24 @@ from .scene_script import get_scene_script, get_scene_summary
 
 from .send_data import page1_data, page2_data, page3_data
 
-import pickle
-
+import pickle, shutil
+#과장님 화이팅!
 # mainpage
 def index_view(request):
+    #세션 생성 및 저장
+    request.session['']=''
+    request.session.save()
+
+    #index 진입 시 사용자 디렉토리 삭제(초기화)
+    base_path=os.getcwd()
+    base_path=os.path.join(base_path, 'web_app', 'static', request.session.session_key)
+    '''
+    try:
+        shutil.rmtree(base_path)
+    except:
+        pass
+    '''
+
     if request.method == 'POST':
         youtube_form = YoutubeForm(request.POST)
 
@@ -69,7 +83,10 @@ def index_view(request):
 
             # Save information as 
             save_data = {'title': title, 'url': url, 'whisper': script, 'scene_summary': scene_summary, 'voice_summary': voice_summary}
-        
+            #save_data{'cut_youtube', 'scene_gif', 'scene_youtube', 'sum_gif', 'voice_gif', 'voice_youtube'}
+            #생성한 파일 리스트 딕셔너리에 추가
+            save_data.update(pre_processing.return_file_name_dict(request.session.session_key))
+            save_data['key']=request.session.session_key
             file_path = os.path.join(base_path, 'data.pkl')
             with open(file_path, 'wb') as fp:
                 pickle.dump(save_data, fp)
@@ -98,7 +115,7 @@ def page1_view(request):
 
     # p1_data: {'title': title, 'url': url, 'summary': full_summary, 'text': [...], 'time': [...], 'pgl_img': []}
     p1_data = page1_data(data)
-
+    
       
     return render(request, 'page1.html', p1_data)
 
