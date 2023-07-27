@@ -98,26 +98,17 @@
         <div class="position-relative h-100">
           <div class="slides-1 portfolio-details-slider swiper">
             <div class="swiper-wrapper align-items-center">
+              
+
+              {% for sum in sum_gif %}
 
               <div class="swiper-slide">
-                <img src="{% static 'img/gallery/gallery-8.jpg' %}" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="{% static 'img/gallery/gallery-9.jpg' %}" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="{% static 'img/gallery/gallery-10.jpg' %}" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="{% static 'img/gallery/gallery-11.jpg' %}" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="{% static 'img/gallery/gallery-12.jpg' %}" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="{% static 'img/gallery/gallery-13.jpg' %}" alt="">
+                <img src="../static/{{key}}/{{sum}}" alt="">
               </div>
 
+              {% endfor %}
+
+              
             </div>
             <div class="swiper-pagination"></div>
           </div>

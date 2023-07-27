@@ -17,10 +17,21 @@ from .voice_time import get_voice_time
 
 from .scene_script import get_scene_script, get_scene_summary
 
-import pickle
+import pickle, shutil
 
 # mainpage
 def index_view(request):
+    request.session['']=''
+    request.session.save()
+
+
+    base_path=os.getcwd()
+    base_path=os.path.join(base_path, 'web_app', 'static', request.session.session_key)
+    '''try:
+        shutil.rmtree(base_path)
+    except:
+        pass'''
+
     if request.method == 'POST':
         youtube_form = YoutubeForm(request.POST)
 
@@ -67,12 +78,14 @@ def index_view(request):
 
             # Save information as 
             save_data = {'title': title, 'url': url, 'whisper': script, 'scene_summary': scene_summary, 'voice_summary': voice_summary}
-        
+            
+            save_data.update(pre_processing.return_file_name_dict(request.session.session_key))
             file_path = os.path.join(base_path, 'data.pkl')
             with open(file_path, 'wb') as fp:
                 pickle.dump(save_data, fp)
 
             pkl_path = os.getcwd()
+            title=title.replace(' ','')
             pkl_path=os.path.join(pkl_path, "web_app", title)
             pkl_path=pkl_path+'.pkl'
             with open(pkl_path, 'wb') as fp:
@@ -81,7 +94,6 @@ def index_view(request):
             return redirect('page1')
     else:
         youtube_form = YoutubeForm()
-    request.session.save()
     return render(request, 'index.html', {'youtube_form': youtube_form, 'key':request.session.session_key})
 
 
@@ -119,6 +131,6 @@ def page3_view(request):
     file_path = os.path.join(base_path, 'data.pkl')
     with open(file_path, 'rb') as fp:
         data = pickle.load(fp)
-
+    data['key']=request.session.session_key
       
     return render(request, 'page3.html', data)
