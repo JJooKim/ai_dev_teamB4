@@ -23,18 +23,21 @@ import pickle, shutil
 # mainpage
 def index_view(request):
     #세션 생성 및 저장
-    request.session['']=''
-    request.session.save()
+    try:
+        request.session.save()
+    except:
+        request.session['']=''
+        request.session.save()
 
     #index 진입 시 사용자 디렉토리 삭제(초기화)
     base_path=os.getcwd()
     base_path=os.path.join(base_path, 'web_app', 'static', request.session.session_key)
-    '''
+    
     try:
         shutil.rmtree(base_path)
     except:
         pass
-    '''
+    
 
     if request.method == 'POST':
         youtube_form = YoutubeForm(request.POST)
