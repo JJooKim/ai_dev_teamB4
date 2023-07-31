@@ -83,14 +83,15 @@ def index_view(request):
             file_path = os.path.join(base_path, 'data.pkl')
             with open(file_path, 'wb') as fp:
                 pickle.dump(save_data, fp)
-
+            '''
             pkl_path = os.getcwd()
-            title=title.replace(' ','')
+            title=title.replace(' ','').replace()
+            
             pkl_path=os.path.join(pkl_path, "web_app", title)
             pkl_path=pkl_path+'.pkl'
             with open(pkl_path, 'wb') as fp:
                 pickle.dump(save_data, fp)
-           
+            '''
             return redirect('page1')
     else:
         youtube_form = YoutubeForm()
