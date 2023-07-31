@@ -47,7 +47,7 @@ def return_file_name_dict(key):
 
     list=os.listdir(base_path)
 
-    cont={'cut_youtube':[],'scene_gif':[],'scene_youtube':[],'sum_gif':[],'voice_gif':[],'voice_youtube':[],}
+    cont={'cut_youtube':[],'scene_gif':[],'scene_youtube':[],'sum_gif':[],'voice_image':[],'voice_youtube':[],}
 
     for i in list:
         if i.startswith('cut_youtube'):
@@ -58,8 +58,8 @@ def return_file_name_dict(key):
             cont['scene_youtube'].append(i)
         elif i.startswith('sum_gif'):
             cont['sum_gif'].append(i)
-        elif i.startswith('voice_gif'):
-            cont['voice_gif'].append(i)
+        elif i.startswith('voice_image'):
+            cont['voice_image'].append(i)
         elif i.startswith('voice_youtube'):
             cont['voice_youtube'].append(i)
 

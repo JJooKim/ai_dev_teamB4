@@ -27,3 +27,8 @@ def vid_sum_from_voice(sum_code, base_path):
         temp = 'ffmpeg -y -i ' + base_path + '/voice_youtube_' + str(i) + '.mp4 -r 15 ' + base_path + '/voice_gif' + str(i) + '.gif'
         os.system(temp)
     return True
+
+def voice_image(sum_code, base_path):
+    for i in range(len(sum_code[0]['Voice Activity Detection based Timeline'])):
+        temp = 'ffmpeg -y -ss ' + str(sum_code[0]['Voice Activity Detection based Timeline'][i]['start']) + ' -i ' + base_path + '/youtube_original.mp4 ' + base_path + '/voice_image_' + str(i) + '.jpg'
+        os.system(temp)

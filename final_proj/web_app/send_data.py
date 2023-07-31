@@ -25,7 +25,7 @@ def page1_data(data):
 
     new_data = {'title': data['title'], 'url': data['url'], 'summary': full_summary, 'text': [], 'time': [], 
                 'cut_youtube': data['cut_youtube'], 'scene_gif': data['scene_gif'], 'scene_youtube': data['scene_youtube'],
-                  'sum_gif': data['sum_gif'], 'voice_gif': data['voice_gif'], 'voice_youtube': data['voice_youtube'],
+                  'sum_gif': data['sum_gif'], 'voice_image': data['voice_image'], 'voice_youtube': data['voice_youtube'],
                   'key': data['key']}
 
     for voice_data in voice_summary:
@@ -45,7 +45,7 @@ def page2_data(data):
 
     new_data = {'title': data['title'], 'url': data['url'], 'summ_text': [], 'time': [], 
                 'cut_youtube': data['cut_youtube'], 'scene_gif': data['scene_gif'], 'scene_youtube': data['scene_youtube'],
-                  'sum_gif': data['sum_gif'], 'voice_gif': data['voice_gif'], 'voice_youtube': data['voice_youtube'],
+                  'sum_gif': data['sum_gif'], 'voice_image': data['voice_image'], 'voice_youtube': data['voice_youtube'],
                   'key': data['key']}
     scene_sum = data['scene_summary']
 
@@ -68,7 +68,7 @@ def page2_data(data):
 def page3_data(data):
     new_data = {'title': data['title'], 'url': data['url'], 'summ_text': [], 'text': [], 'start_time': [], 
                 'cut_youtube': data['cut_youtube'], 'scene_gif': data['scene_gif'], 'scene_youtube': data['scene_youtube'],
-                  'sum_gif': data['sum_gif'], 'voice_gif': data['voice_gif'], 'voice_youtube': data['voice_youtube'], 
+                  'sum_gif': data['sum_gif'], 'voice_image': data['voice_image'], 'voice_youtube': data['voice_youtube'], 
                   'key': data['key']}
     # new_data = {'summ_text': ['dfsdfsdf'], 'text': [['dfs', 'df', 'sdf']], 'start_time': [[0, 1, 2]]}
     voice_sum = data['voice_summary']

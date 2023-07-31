@@ -95,10 +95,16 @@
 
         <div class="row gy-4 justify-content-center">
           <div class="col-lg-4">
-            <img src="{% static 'img/profile-img.jpg' %}" class="img-fluid" alt="">
+            {% for img in voice_image %}
+
+                <img src="../static/{{key}}/{{img}}"  class="img-fluid" alt="">
+
+              {% endfor %}
+            {% comment %} <img src="{% static {{voice_img}} %}" class="img-fluid" alt="">
+            <img src="{% static 'xoftnvyir6f8chw8ke6zqtpbk8vxhob1/voice_image_1.jpg' %}" class="img-fluid" alt=""> {% endcomment %}
           </div>
           <div class="col-lg-5 content">
-            <h2>Full Summary Script of the Video</h2>
+            <h2>Voice Summary Script of the Video</h2>
             <p class="fst-italic py-3">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
               magna aliqua.
@@ -112,7 +118,7 @@
               </div>
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Video url:</strong> <span>www.example.com</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Video url:</strong> <span>{{url}}</span></li>
                 </ul>
               </div>
             </div>
@@ -126,9 +132,9 @@
 
             <p class="py-3">The Scene Timeline is: {{ scene_time }}</p>
 
-            <p class="m-0">The Voice summary is: {{ voice_summary }}</p>
+            <p class="m-0">The Voice summary is: {{ text }}</p>
 
-            <p class="m-0">The Scene summary is: {{ scene_summary }}</p>
+            <p class="m-0">The Scene summary is: {{ start_time }}</p>
 
           </div>
         </div>
