@@ -13,7 +13,7 @@ def get_scene_time(v_path):
     scene_manager = SceneManager(stats_manager)
 
     # threshold : 0~100 사이의 값으로, 0으로 갈수록 민감하게
-    scene_manager.add_detector(ContentDetector(threshold=30))
+    scene_manager.add_detector(ContentDetector(threshold=70))
 
     # 처리속도 향상을 위해 이미지 크기를 낮춤
     video_manager.set_downscale_factor()

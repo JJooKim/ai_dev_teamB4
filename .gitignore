@@ -1,3 +1,10 @@
 **/__pycache__
 venv
 pjenv
+final_proj/web_app/static/
+!final_proj/web_app/static/assets
+!final_proj/web_app/static/css
+!final_proj/web_app/static/img
+!final_proj/web_app/static/js
+!final_proj/web_app/static/scss
+!final_proj/web_app/static/vendor
