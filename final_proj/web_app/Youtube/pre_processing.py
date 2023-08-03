@@ -22,7 +22,7 @@ def mp4towav(video_path, base_path):
 def saveVideo(url, base_path):
     data = pytube.YouTube(url)
     title = data.streams[0].title
-
+    length = data.length
     video = data.streams.filter(file_extension='mp4').first()         # video를 위한 mp4 download
     video_path = video.download(base_path) # file name 설정 필요
 
@@ -38,7 +38,7 @@ def saveVideo(url, base_path):
 
     
 
-    return new_video_path, audio_path, title
+    return new_video_path, audio_path, title, length
 
 
 def return_file_name_dict(key):
