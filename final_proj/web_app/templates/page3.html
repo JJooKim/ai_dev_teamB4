@@ -54,16 +54,9 @@
       <nav id="navbar" class="navbar">
         <ul>
    
-          <li><a href="/page1/" class="active">page1</a></li>
-          <li class="dropdown"><a href="#"><span>Gallery</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="/page1/">page1</a></li>
-              <li><a href="/page2/">page2</a></li>
-              <li><a href="/page3/">page3</a></li>
-            </ul>
-          </li>
+          <li><a href="/page1/">page1</a></li>
           <li><a href="/page2/">page2</a></li>
-          <li><a href="/page3/">page3</a></li>
+          <li><a href="/page3/" class="active">page3</a></li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -92,109 +85,23 @@
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
       <div class="container">
-
-        <div class="row gy-4 justify-content-center">
-          <div class="col-lg-4" style="border:solid 1px red">
+        {{text}}
+        <hr>
+        <div class="row gy-4 justify-content-start">
             {% for img, text in zip_voice_image_summ_text %}
-              <div style="border:solid 1px blue">
-              <img src="../static/{{key}}/{{img}}"  class="img-fluid" alt="">
+              <div style="width:50%">
+              <img src="../static/{{key}}/{{img}}"  class="img-fluid" width="100%" alt="">
               </div>
-              <div style="border:solid 1px purple"><p>{{text}}</p></div>
+              <div style="width:50%;display:flex;align-items:center;"><p style="font-size:larger;font-weight: 300;font-family:Arial, Helvetica, sans-serif">{{text}}</p></div>
+              <div style="width:100%;border:solid 1px grey;"></div>
             {% endfor %}
-          </div>
+        
+          <p>{{full_text}}</p>
+        
         </div>
 
       </div>
     </section><!-- End About Section -->
-
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
-      <div class="container">
-
-        <div class="section-header">
-          <h2>Designed by PGL SUM</h2>
-          <p>Hight light Scenes</p>
-        </div>
-
-        <div class="slides-3 swiper">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-
-                <div class="profile mt-auto">
-                  <img src="{% static 'img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="">
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-
-                <div class="profile mt-auto">
-                  <img src="{% static 'img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-
-                <div class="profile mt-auto">
-                  <img src="{% static 'img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-
-                <div class="profile mt-auto">
-                  <img src="{% static 'img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-
-                <div class="profile mt-auto">
-                  <img src="{% static 'img/testimonials/testimonials-5.jpg' %}" class="testimonial-img" alt="">
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Testimonials Section -->
 
   </main><!-- End #main -->
 

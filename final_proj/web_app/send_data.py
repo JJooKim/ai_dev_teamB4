@@ -75,12 +75,23 @@ def page3_data(data):
     voice_sum = data['voice_summary'][:]
     whisper_data = data['whisper']
 
-    for voice_data in voice_sum:
+    next_end_time = voice_sum[1]['start']
+
+
+
+    for i, voice_data in enumerate(voice_sum):
         # voice_data = {'tid': idx, 'start':start, 'end': end, 'text': txt, 'summ_text': sum_text}
+
+
+
         new_data['summ_text'].append(voice_data['summ_text'])
 
         start_time = voice_data['start']
-        end_time = voice_data['end']
+
+        if i != len(voice_sum)-1:
+            end_time = voice_sum[i+1]['start']
+        else:
+            end_time = voice_data['end']
 
         timeline_script = []
         timeline_start = []
@@ -92,7 +103,7 @@ def page3_data(data):
             if start_time <= w_data['start'] and is_start == False:
                 is_start = True
 
-            if end_time <= w_data['end'] and is_end == False:
+            if end_time <= w_data['end'] and is_end == False: ##
                 is_end = True
             
             if is_start and not is_end :
@@ -103,8 +114,17 @@ def page3_data(data):
                 new_data['text'].append(timeline_script)
                 new_data['start_time'].append(timeline_start)
                 break
+
     new_data['zip_voice_image_summ_text'] = zip(new_data['voice_image'],new_data['summ_text'])
     
+    full_text = ""
+
+    for w_data in whisper_data:
+        #full_text.append(w_data['text'])
+        full_text = full_text+' '+ w_data['text']
+
+
+    new_data['full_text'] = full_text
     return new_data
 
 
