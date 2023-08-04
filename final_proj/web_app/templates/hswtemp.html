@@ -94,13 +94,41 @@
       <div class="container">
 
         <div class="row gy-4 justify-content-center">
-          <div class="col-lg-4" style="border:solid 1px red">
-            {% for img, text in zip_voice_image_summ_text %}
-              <div style="border:solid 1px blue">
+          <div class="col-lg-4">
+            {% for img in voice_image %}
+
               <img src="../static/{{key}}/{{img}}"  class="img-fluid" alt="">
-              </div>
-              <div style="border:solid 1px purple"><p>{{text}}</p></div>
+
             {% endfor %}
+          </div>
+          <div class="col-lg-5 content">
+            <h2>Voice Summary Script of the Video</h2>
+            <p class="fst-italic py-3">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Video length:</strong> <span>547 seconds</span></li>
+                </ul>
+              </div>
+            </div>
+            <div style="border:1px solid red;"><p class="py-3">The URL is: <a href="{{url}}">{{ url }}</a></p></div>
+
+            <p class="py-3">The Whisper Script is: {{ script }}</p>
+
+            <p class="py-3">The PGL Sum Timeline is: {{ video }}</p>
+
+            <p class="py-3">The Voice Timeline is: {{ voice_time }}</p>
+
+            <p class="py-3">The Scene Timeline is: {{ scene_time }}</p>
+
+            <p class="m-0">The Voice summary is: {{ text }}</p>
+
+            <p class="m-0">The Scene summary is: {{ start_time }}</p>
+
           </div>
         </div>
 

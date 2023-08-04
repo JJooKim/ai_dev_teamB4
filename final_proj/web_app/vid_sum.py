@@ -4,8 +4,7 @@ from facenet_pytorch import MTCNN
 import torch
 import numpy as np
 import mmcv, cv2
-from PIL import Image, ImageDraw, ImageStat
-import math
+from PIL import Image, ImageStat
 
 def vid_sum(sum_code, base_path):
     for i in range(len(sum_code['output'])):
@@ -41,11 +40,10 @@ def brightness(frame):
 
 def voice_image(sum_code, base_path):
     mtcnn = MTCNN(keep_all=True)
-    image_list=[]
     for i in range(len(sum_code[0]['Voice Activity Detection based Timeline'])):
-        video = mmcv.VideoReader(base_path+'/scene_youtube_'+str(i)+'.mp4')
+        video = mmcv.VideoReader(base_path+'/voice_youtube_'+str(i)+'.mp4')
         frames = [Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)) for frame in video]
-        best_image=[0, 0, 0]
+        best_image=[0, 0, frames[0]]
 
         for frame in frames[::10]:
             boxes, _ = mtcnn.detect(frame)
@@ -59,11 +57,4 @@ def voice_image(sum_code, base_path):
                 if brightness(frame) > best_image[1] and brightness(frame) < 100:
                     best_image=[boxes, brightness(frame), frame]
         
-        image_list.append(best_image)
-
-    image_list.sort(key=lambda x: (x[0], x[1]), reverse=True)
-    
-    for i in range(3):
-        image_list[i][2].save(base_path+'/voice_image_'+str(i)+'.jpg')
-
-    
+        best_image[2].save(base_path+'/voice_image_'+str(i)+'.jpg')

@@ -67,15 +67,16 @@ def index_view(request):
             scene_time = get_scene_time(v_path, length) 
             vid_sum_from_scene(scene_time,base_path)
             # Voice Detect 타임 라인 
-            voice_time = get_voice_time(a_path) 
-            voice_image(voice_time,base_path)
+            voice_time = get_voice_time(a_path)
+            
 
             # Scene, Voice, 타임라인 별 script & summary 반환
             
             scene_summary = get_scene_summary(script, scene_time)
 
             voice_summary = get_scene_summary(script, voice_time[0]['Voice Activity Detection based Timeline'])
-
+            vid_sum_from_voice(voice_time, base_path)
+            voice_image(voice_time,base_path)
     #        [{'Voice Activity Detection based Timeline': [{'start': 0, 'end': 13}, {'start': 33, 'end': 63}]}]
 
             # Save information as 
@@ -96,10 +97,12 @@ def index_view(request):
             with open(pkl_path, 'wb') as fp:
                 pickle.dump(save_data, fp)
 
+            '''
             # download 받은 영상 제거
             pre_processing.removeVideo(a_path)
             pre_processing.removeVideo(v_path)
             pre_processing.removeVideo(low_v_path)
+            '''
 
             return redirect('page1')
     else:

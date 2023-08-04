@@ -70,9 +70,9 @@ def page3_data(data):
                 'cut_youtube': data['cut_youtube'], 'scene_gif': data['scene_gif'], 'scene_youtube': data['scene_youtube'],
                   'sum_gif': data['sum_gif'], 'voice_image': data['voice_image'], 'voice_youtube': data['voice_youtube'], 
                   'key': data['key']}
-    new_data['voice_image']=new_data['voice_image'][:3]
+    
     # new_data = {'summ_text': ['dfsdfsdf'], 'text': [['dfs', 'df', 'sdf']], 'start_time': [[0, 1, 2]]}
-    voice_sum = data['voice_summary']
+    voice_sum = data['voice_summary'][:]
     whisper_data = data['whisper']
 
     for voice_data in voice_sum:
@@ -103,6 +103,7 @@ def page3_data(data):
                 new_data['text'].append(timeline_script)
                 new_data['start_time'].append(timeline_start)
                 break
+    new_data['zip_voice_image_summ_text'] = zip(new_data['voice_image'],new_data['summ_text'])
     
     return new_data
 
