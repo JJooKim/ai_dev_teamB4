@@ -1,5 +1,5 @@
 import copy
-
+import os
 def get_scene_script(script, timeline):
     ret = []
     curr_script_id = 0
@@ -33,8 +33,12 @@ from transformers import PreTrainedTokenizerFast, BartForConditionalGeneration
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 tokenizer = PreTrainedTokenizerFast.from_pretrained('gogamza/kobart-summarization')
 model = BartForConditionalGeneration.from_pretrained('gogamza/kobart-summarization')
-model = model.to(device)
 
+pt_path = os.getcwd()
+pt_path = os.path.join(pt_path, 'web_app', './conv_epoch_7.pt')
+
+model.load_state_dict(torch.load(pt_path))
+model = model.to(device)
 kiwi = Kiwi()
 
 
