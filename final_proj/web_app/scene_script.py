@@ -38,7 +38,9 @@ pt_path = os.getcwd()
 pt_path = os.path.join(pt_path, 'web_app', './conv_epoch_7.pt')
 
 model.load_state_dict(torch.load(pt_path))
+
 model = model.to(device)
+
 kiwi = Kiwi()
 
 
