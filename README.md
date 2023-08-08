@@ -39,10 +39,10 @@
 ### 현상관리 및 협업 도구
 
 - GitHub, Git
-- GitHub Issues : 각자 활동 내역에 대해 이슈 등록 후 작업 진행
+- GitHub Issues : 기능 단위로 브랜치 생성 후 작업 진행
 - Slack : 각 컴포넌트별 전달 사항 작성
 - VScode liveshare : 공통적인 문제 같이 해결
-- Notion : [주간 회의록 작성 및 기록](https://www.notion.so/213a97533099429287dc06f75768add5)
+- Notion : [주간 회의록 작성 및 기록]https://www.notion.so/fb75e1ff439d4da79f9a608e23282b0c?v=b76fa00248504411aee4c8c362d1018d&pvs=4
 
 
 ## 구현기능
@@ -50,16 +50,6 @@
 <img width="831" alt="image" src="https://github.com/JJooKim/ai_dev_teamB4/assets/122198271/aef3a5e3-dc23-429e-84d0-24265fdf89c4">
 <img width="831" alt="image" src="https://github.com/JJooKim/ai_dev_teamB4/assets/122198271/5109835b-ec53-4b21-b07d-e96c24478090">
 
-
-
-
-<p align="right"><a href="#top">⬆️Top</a></p>
-
-## 프로젝트 구조
-
-```markdown
-
-```
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
